@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s){
 	return i;
 }
 
+
+
 char	*ft_strdup(const char *str){
 	char	*new_str;
 
@@ -28,29 +30,30 @@ char	*ft_strdup(const char *str){
 		str++;
 	}
 	*new_str = '\0';
-	return new_str;
+	return new_str - ft_strlen(str);
 }
 
 char *ft_strjoin(const char *s1, const char *s2){
+	int	i;
+	int	j;
 	char	*str;
 	size_t len;
 
 	len = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(len + 1);
+	i = 0;
+	j = 0;
 	if(!str)
 		return NULL;
-	while(*s1){
-		*str = *s1;
-		s1++;
-		str++;
+	while(s1[i]){
+		str[i] = s1[i];
+		i++;
 	}
-	while(*s2){
-		*str = *s2;
-		s2++;
-		str++;
+	while(s2[j]){
+		str[i+j] = s2[j];
+		j++;
 	}
-	*str = '\0';
-	str -= len;
+	str[i+j] = '\0';
 
 	return str;
 }
@@ -118,9 +121,7 @@ char *get_next_line(int fd){
 			break;
 	}
 	line = allocate_line(backup - n);
-	while(*backup != '\0' && *backup != '\n')
-		backup++;
-	backup++;
+	backup = ft_substr();
 	return line;
 }
 
