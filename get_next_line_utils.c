@@ -102,3 +102,55 @@ char	*allocate_line(char *backup){
 	}
 	return line;
 }
+
+static char	*allocate_size(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	size_t	size;
+
+	if (ft_strlen(s) < start)
+	{
+		substr = malloc(1);
+		if (!substr)
+			return (NULL);
+		*substr = '\0';
+		return (substr);
+	}
+	if (ft_strlen(s) - start > len)
+	{
+		size = len + 1;
+	}
+	else
+	{
+		size = ft_strlen(s) - start + 1;
+	}
+	substr = malloc(size);
+	if (substr == NULL)
+		return (NULL);
+	return (substr);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*substr;
+	char	*ptr;
+
+	substr = allocate_size(s, start, len);
+	if (!substr)
+		return (NULL);
+	ptr = substr;
+	while (start && *s)
+	{
+		s++;
+		start--;
+	}
+	while (*s && len)
+	{
+		*ptr = *s;
+		ptr++;
+		s++;
+		len--;
+	}
+	*ptr = '\0';
+	return (substr);
+}

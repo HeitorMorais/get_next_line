@@ -18,17 +18,17 @@ char *get_next_line(int fd){
 			break;
 	}
 	line = allocate_line(backup - n);
-	//backup = ft_substr();
+	backup = ft_substr(backup, ft_strlen(line), ft_strlen(backup) - ft_strlen(line));
 	return line;
 }
 
 int main(){
 	int fd = open("example.txt", O_RDONLY);
 	if(fd == -1) { perror("open"); return 1;}
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	printf("%s a", get_next_line(fd));
+	printf("%s a", get_next_line(fd));
+	printf("%s a", get_next_line(fd));
+	printf("%s a", get_next_line(fd));
 	close(fd);
 	return 0;
 }	
